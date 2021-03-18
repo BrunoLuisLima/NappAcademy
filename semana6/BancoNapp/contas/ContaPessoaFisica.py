@@ -14,58 +14,65 @@ class ContaPessoaFisica(Conta):
         Construtor da classe PessoaFísica.
         Extrai do dicionário kwargs a profissao do correntista.
         """
-        self.profissao = kwargs.get('profissao', '')
         super(ContaPessoaFisica, self).__init__(**kwargs)
+        self.profissao = kwargs.get('profissao', '')
 
+    #Parte abaixo lembrar de tirar e jogar em conta
     def deposito(self, valor):
-        """
-        Método para realizar depósito.
-        Este método suporta somente números maiores que zero.
+            """
+            Método para realizar depósito.
+            Este método suporta somente números maiores que zero.
 
-        Args:
-            valor (float ou int): Valor positivo do depósito
+            Args:
+                valor (float ou int): Valor positivo do depósito
 
-        Raises:
-            ValueError: Erro ocorre quando é informado valor negativo.
-            TypeError: Quando o tipo passado não for inteiro ou float.
-        """
-        if isinstance(valor, (float, int)):
-            if valor <= 0:
-                raise ValueError('Valor do depósito precisa ser maior que zero')
-            self.saldo = self.saldo + valor
-            self.extrato.append(('D', valor))
-            return
-        raise TypeError('O depósito precisa ser numérico')
+            Raises:
+                ValueError: Erro ocorre quando é informado valor negativo.
+                TypeError: Quando o tipo passado não for inteiro ou float.
+            """
+
+            if isinstance(valor, (float, int)):
+                if valor <= 0:
+                    raise ValueError('Valor do depósito precisa ser maior que zero')
+                self.saldo = self.saldo + valor
+                self.extrato.append(('D', valor))
+                return
+            raise TypeError('O depósito precisa ser numérico')
 
     def saque(self, valor):
-        """
-        Método para realizar saque.
-        Este método suporta somente números maiores que zero.
+            """
+            Método para realizar saque.
+            Este método suporta somente números maiores que zero.
 
-        Args:
-            valor (float ou int): Valor positivo do saque
+            Args:
+                valor (float ou int): Valor positivo do saque
 
-        Raises:
-            ValueError: Erro ocorre quando é informado valor negativo.
-            TypeError: Quando o tipo passado não for inteiro ou float.
+            Raises:
+                ValueError: Erro ocorre quando é informado valor negativo.
+                TypeError: Quando o tipo passado não for inteiro ou float.
 
-        Returns:
-            Float: Valor do saque realizado.
-        """
-        if isinstance(valor, (float, int)):
-            if valor > (self.saldo + self.limite):
-                raise ValueError('Valor do saque supera seu saldo e seu limite')
-                return
-            self.saldo = self.saldo - valor
-            self.extrato.append(('S', valor))
-            return valor
-        raise TypeError('O valor do saque precisa ser numérico')
+            Returns:
+                Float: Valor do saque realizado.
+            """
+            if isinstance(valor, (float, int)):
+                if valor > (self.saldo + self.limite):
+                    raise ValueError('Valor do saque supera seu saldo e seu limite')
+                    return
+                self.saldo = self.saldo - valor
+                self.extrato.append(('S', valor))
+                return valor
+            raise TypeError('O valor do saque precisa ser numérico')
 
     def get_extrato(self):
-        """
-        Retorna a lista dos saques e depósitos feitos na conta.
+            """
+            Retorna a lista dos saques e depósitos feitos na conta.
 
-        Returns:
-            List: Lista de operações
-        """
-        return self.extrato
+            Returns:
+                List: Lista de operações
+            """
+            return self.extrato
+
+
+        
+
+    
